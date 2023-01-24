@@ -5,8 +5,6 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.DecimalFormat;
@@ -17,8 +15,18 @@ import java.util.List;
 
 
 public class Question1 {
-    public static HashMap<String, Double> yearlySummaryFor2020 = new HashMap<>();
-    public static HashMap<String, Double> yearlySummaryFor2021 = new HashMap<>();
+    protected static HashMap<String, Double> yearlySummaryFor2020 = new HashMap<>();
+    protected static HashMap<String, Double> yearlySummaryFor2021 = new HashMap<>();
+
+    static String directoryForExcel = "src/main/resources/Employee Data.xlsx";
+
+    static DecimalFormat formatter = new DecimalFormat("#,###.##");
+
+    static String associate = "Associate";
+    static String seniorAssociate = "Senior Associate";
+    static String seniorArchitect = "Senior Architect";
+    static String designation = "Designation";
+    static String totalSalary = "Total Salary";
 
     public static void main(String[] args) {
         readData();
@@ -28,7 +36,9 @@ public class Question1 {
     public static void writeExcel() {
         try {
             // Open the Excel file
-            FileInputStream fis = new FileInputStream(new File("src/main/resources/Employee Data.xlsx"));
+
+
+            FileInputStream fis = new FileInputStream(directoryForExcel);
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
             // Create a new sheet
@@ -85,51 +95,59 @@ public class Question1 {
             XSSFCell cell29 = row18.createCell(0);
             XSSFCell cell30 = row18.createCell(1);
 
-            DecimalFormat formatter = new DecimalFormat("#,###.##");
-            String formattedNumber = formatter.format(yearlySummaryFor2020.get("Associate") + yearlySummaryFor2021.get("Associate"));
-            String formattedNumber1 = formatter.format(yearlySummaryFor2020.get("Senior Associate") + yearlySummaryFor2021.get("Senior Associate"));
-            String formattedNumber2 = formatter.format(yearlySummaryFor2020.get("Senior Architect") + yearlySummaryFor2021.get("Senior Architect"));
-            String formattedNumber3 = formatter.format(yearlySummaryFor2020.get("Associate"));
-            String formattedNumber4 = formatter.format(yearlySummaryFor2020.get("Senior Associate"));
-            String formattedNumber5 = formatter.format(yearlySummaryFor2020.get("Senior Architect"));
-            String formattedNumber6 = formatter.format(yearlySummaryFor2021.get("Associate"));
-            String formattedNumber7 = formatter.format(yearlySummaryFor2021.get("Senior Associate"));
-            String formattedNumber8 = formatter.format(yearlySummaryFor2021.get("Senior Architect"));
+            Double yearlySummer2020Associate = yearlySummaryFor2020.get(associate);
+            Double yearlySummer2021Associate = yearlySummaryFor2021.get(associate);
+            Double yearlySummer2020SeniorAssociate = yearlySummaryFor2020.get(seniorAssociate);
+            Double yearlySummer2021SeniorAssociate = yearlySummaryFor2021.get(seniorAssociate);
+            Double yearlySummer2020SeniorArchitect = yearlySummaryFor2020.get(seniorArchitect);
+            Double yearlySummer2021SeniorArchitect = yearlySummaryFor2021.get(seniorArchitect);
+
+            String formattedNumber = formatter.format(yearlySummer2020Associate + yearlySummer2021Associate);
+            String formattedNumber1 = formatter.format(yearlySummer2020SeniorAssociate + yearlySummer2021SeniorAssociate);
+            String formattedNumber2 = formatter.format(yearlySummer2020SeniorArchitect + yearlySummer2021SeniorArchitect);
+            String formattedNumber3 = formatter.format(yearlySummer2020Associate);
+            String formattedNumber4 = formatter.format(yearlySummer2020SeniorAssociate);
+            String formattedNumber5 = formatter.format(yearlySummer2020SeniorArchitect);
+            String formattedNumber6 = formatter.format(yearlySummer2021Associate);
+            String formattedNumber7 = formatter.format(yearlySummer2021SeniorAssociate);
+            String formattedNumber8 = formatter.format(yearlySummer2021SeniorArchitect);
+
             // Set the value of the cell
-            cell1.setCellValue("Total Salary");
-            cell2.setCellValue("Designation");
-            cell3.setCellValue("Total Salary");
-            cell4.setCellValue("Associate");
+            cell1.setCellValue(totalSalary);
+            cell2.setCellValue(designation);
+            cell3.setCellValue(totalSalary);
+            cell4.setCellValue(associate);
             cell5.setCellValue("$ " + formattedNumber);
-            cell6.setCellValue("Senior Associate");
-            cell7.setCellValue("$ "+ formattedNumber1);
-            cell8.setCellValue("Senior Architect");
-            cell9.setCellValue("$ "+ formattedNumber2);
+            cell6.setCellValue(seniorAssociate);
+            cell7.setCellValue("$ " + formattedNumber1);
+            cell8.setCellValue(seniorArchitect);
+            cell9.setCellValue("$ " + formattedNumber2);
             cell10.setCellValue("Yearly Summary");
             cell11.setCellValue("Year");
             cell12.setCellValue("2020");
-            cell13.setCellValue("Designation");
-            cell14.setCellValue("Total Salary");
-            cell15.setCellValue("Associate");
-            cell16.setCellValue("$ "+ formattedNumber3);
-            cell17.setCellValue("Senior Associate");
-            cell18.setCellValue("$ "+ formattedNumber4);
-            cell19.setCellValue("Senior Architect");
-            cell20.setCellValue("$ "+ formattedNumber5);
+            cell13.setCellValue(designation);
+            cell14.setCellValue(totalSalary);
+            cell15.setCellValue(associate);
+            cell16.setCellValue("$ " + formattedNumber3);
+            cell17.setCellValue(seniorAssociate);
+            cell18.setCellValue("$ " + formattedNumber4);
+            cell19.setCellValue(seniorArchitect);
+            cell20.setCellValue("$ " + formattedNumber5);
             cell21.setCellValue("Year");
             cell22.setCellValue("2021");
-            cell23.setCellValue("Designation");
-            cell24.setCellValue("Total Salary");
-            cell25.setCellValue("Associate");
-            cell26.setCellValue("$ "+ formattedNumber6);
-            cell27.setCellValue("Senior Associate");
-            cell28.setCellValue("$ "+ formattedNumber7);
-            cell29.setCellValue("Senior Architect");
-            cell30.setCellValue("$ "+ formattedNumber8);
+            cell23.setCellValue(designation);
+            cell24.setCellValue(totalSalary);
+            cell25.setCellValue(associate);
+            cell26.setCellValue("$ " + formattedNumber6);
+            cell27.setCellValue(seniorAssociate);
+            cell28.setCellValue("$ " + formattedNumber7);
+            cell29.setCellValue(seniorArchitect);
+            cell30.setCellValue("$ " + formattedNumber8);
 
             // Write the data to the file
-            FileOutputStream fos = new FileOutputStream(new File("Processed output.xlsx"));
+            FileOutputStream fos = new FileOutputStream("Processed output.xlsx");
             workbook.write(fos);
+            workbook.close();
             fos.close();
             fis.close();
         } catch (Exception e) {
@@ -141,7 +159,7 @@ public class Question1 {
 
         try {
             // Open the Excel file
-            FileInputStream fis = new FileInputStream(new File("src/main/resources/Employee Data.xlsx"));
+            FileInputStream fis = new FileInputStream(directoryForExcel);
             Workbook workbook = new XSSFWorkbook(fis);
 
 
@@ -181,11 +199,7 @@ public class Question1 {
                     yearlySummaryFor2021.put(employee.getDesignation(), value);
                 }
             }
-
-
-            System.out.println(yearlySummaryFor2020);
-            System.out.println(yearlySummaryFor2021);
-
+            workbook.close();
             fis.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -224,16 +238,5 @@ class Employee {
 }
 
 
-//        FileInputStream inputStream = new FileInputStream("src/main/resources/Employee Data.xlsx");
-//        Workbook workbook = new XSSFWorkbook(inputStream);
-//        Sheet sheet = workbook.getSheet("Employee Data");
-//
-//        // Iterate through each rows
-//        for (Row row : sheet) {
-//            // Get the second cell (column 2)
-//            Cell cell = row.getCell(1);
-//            // Print the cell value
-//            System.out.println(cell.getStringCellValue());
-//        }
-//        inputStream.close();
+
 
