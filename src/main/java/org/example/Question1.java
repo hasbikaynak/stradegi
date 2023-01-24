@@ -33,7 +33,32 @@ public class Question1 {
         writeExcel();
     }
 
+//    public static void createCellsAndRows(Object[][] data, XSSFSheet sheet){
+//        for (int i = 0; i < data.length; i++) {
+//            Row row = sheet.createRow(i + 1);
+//            for (int j = 0; j < data[i].length; j++) {
+//                row.createCell(j).setCellValue(String.valueOf(data[i][j]));
+//            }
+//        }
+//    }
+
     public static void writeExcel() {
+        Double yearlySummer2020Associate = yearlySummaryFor2020.get(associate);
+        Double yearlySummer2021Associate = yearlySummaryFor2021.get(associate);
+        Double yearlySummer2020SeniorAssociate = yearlySummaryFor2020.get(seniorAssociate);
+        Double yearlySummer2021SeniorAssociate = yearlySummaryFor2021.get(seniorAssociate);
+        Double yearlySummer2020SeniorArchitect = yearlySummaryFor2020.get(seniorArchitect);
+        Double yearlySummer2021SeniorArchitect = yearlySummaryFor2021.get(seniorArchitect);
+
+        String formattedNumber = formatter.format(yearlySummer2020Associate + yearlySummer2021Associate);
+        String formattedNumber1 = formatter.format(yearlySummer2020SeniorAssociate + yearlySummer2021SeniorAssociate);
+        String formattedNumber2 = formatter.format(yearlySummer2020SeniorArchitect + yearlySummer2021SeniorArchitect);
+        String formattedNumber3 = formatter.format(yearlySummer2020Associate);
+        String formattedNumber4 = formatter.format(yearlySummer2020SeniorAssociate);
+        String formattedNumber5 = formatter.format(yearlySummer2020SeniorArchitect);
+        String formattedNumber6 = formatter.format(yearlySummer2021Associate);
+        String formattedNumber7 = formatter.format(yearlySummer2021SeniorAssociate);
+        String formattedNumber8 = formatter.format(yearlySummer2021SeniorArchitect);
         try {
             // Open the Excel file
 
@@ -43,6 +68,19 @@ public class Question1 {
 
             // Create a new sheet
             XSSFSheet sheet = workbook.createSheet("Processed output");
+
+//            Row row1 = sheet.createRow(0);
+//            row1.createCell(0).setCellValue(designation);
+//            row1.createCell(1).setCellValue(totalSalary);
+//
+//            Object[][] data = {
+//                    {associate,formattedNumber},
+//                    {seniorAssociate,formattedNumber1},
+//                    {seniorArchitect,formattedNumber2},
+//            };
+//
+//              createCellsAndRows(data,sheet);
+
 
 
             // Create a new row
@@ -95,24 +133,8 @@ public class Question1 {
             XSSFCell cell29 = row18.createCell(0);
             XSSFCell cell30 = row18.createCell(1);
 
-            Double yearlySummer2020Associate = yearlySummaryFor2020.get(associate);
-            Double yearlySummer2021Associate = yearlySummaryFor2021.get(associate);
-            Double yearlySummer2020SeniorAssociate = yearlySummaryFor2020.get(seniorAssociate);
-            Double yearlySummer2021SeniorAssociate = yearlySummaryFor2021.get(seniorAssociate);
-            Double yearlySummer2020SeniorArchitect = yearlySummaryFor2020.get(seniorArchitect);
-            Double yearlySummer2021SeniorArchitect = yearlySummaryFor2021.get(seniorArchitect);
 
-            String formattedNumber = formatter.format(yearlySummer2020Associate + yearlySummer2021Associate);
-            String formattedNumber1 = formatter.format(yearlySummer2020SeniorAssociate + yearlySummer2021SeniorAssociate);
-            String formattedNumber2 = formatter.format(yearlySummer2020SeniorArchitect + yearlySummer2021SeniorArchitect);
-            String formattedNumber3 = formatter.format(yearlySummer2020Associate);
-            String formattedNumber4 = formatter.format(yearlySummer2020SeniorAssociate);
-            String formattedNumber5 = formatter.format(yearlySummer2020SeniorArchitect);
-            String formattedNumber6 = formatter.format(yearlySummer2021Associate);
-            String formattedNumber7 = formatter.format(yearlySummer2021SeniorAssociate);
-            String formattedNumber8 = formatter.format(yearlySummer2021SeniorArchitect);
 
-            // Set the value of the cell
             cell1.setCellValue(totalSalary);
             cell2.setCellValue(designation);
             cell3.setCellValue(totalSalary);
